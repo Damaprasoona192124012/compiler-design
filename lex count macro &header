@@ -1,0 +1,29 @@
+%{
+int nmacro,nheader;
+%}
+%%
+^#define {nmacro++;}
+^#include {nheader++;}
+.|\n {}
+%%
+int yywrap(void){
+return 1;
+}
+int main(int argc,char *argv[]){
+yyin=fopen(argv[1],"r");
+yylex();
+printf("no of macro=%d\n",nmacro);
+printf("no of header=%d\n",nheader);
+fclose(yyin);
+}
+
+
+
+//input c program//
+#include<stdio.h> 
+int main() 
+{ 
+ int a,b,c = 30; 
+ printf("hello"); 
+ return 0;
+ } 
